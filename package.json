@@ -1,0 +1,9 @@
+{
+  "name": "locationtag",
+  "version": "0.0.1",
+  "author": "tertis",
+  "main": "server.js",
+  "dependencies": {
+    "express": "4.x"
+  }
+}
