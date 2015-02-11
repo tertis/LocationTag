@@ -7,11 +7,12 @@
     <style>
         html, body, #map-canvas {
             height: 100%;
-            margin: 0px;
-            padding: 0px
+            width: 90%;
         }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+    <script src="angularjstest.js"></script>
     <script>
         var map;
         function initialize() {
@@ -27,7 +28,18 @@
 
     </script>
 </head>
-<body>
+<body ng-app="myapp">
+
+<div ng-controller="MyController" >
+    <form>
+        <input type="text" name="firstName" ng-model="myForm.firstName"> First name <br/>
+        <input type="text" name="lastName"  ng-model="myForm.lastName"> Last name <br/>
+    </form>
+
+    <div>
+        {{myForm.firstName}} {{myForm.lastName}}
+    </div>
+</div>
 <div id="map-canvas"></div>
 </body>
 </html>
