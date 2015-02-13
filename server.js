@@ -6,11 +6,14 @@ var path = require('path');
 var app = express();
 
 var clientDir = path.join(__dirname, 'public');
+var port = 3000;
 
+// directory를 use해 줘야 angular js의 스크립트가 사용 가능하다.
 app.use(express.static(clientDir));
 app.get('*', function(req, res){
     // sendFile은 절대 경로를 사용해야 한다.
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(clientDir, 'index.html'));
 });
 
-app.listen(3000);
+app.listen(port);
+console.log('Start Listen ' + port);
