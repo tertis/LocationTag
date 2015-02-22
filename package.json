@@ -4,6 +4,7 @@
   "author": "tertis",
   "main": "server.js",
   "dependencies": {
-    "express": "4.x"
+    "pg": "4.x",
+    "express": "latest"
   }
 }

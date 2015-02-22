@@ -4,6 +4,7 @@
 var express = require('express');
 var path = require('path');
 var app = express();
+var database = require( __dirname + '/api/database');
 
 var clientDir = path.join(__dirname, 'public');
 var port = 3000;

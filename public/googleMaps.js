@@ -4,8 +4,9 @@
 var map;
 function initialize() {
     var mapOptions = {
-        zoom: 8,
-        center: new google.maps.LatLng(-34.397, 150.644)
+        zoom: 12,
+        // 일단 서울 위치
+        center: new google.maps.LatLng(37.5, 127)
     };
 
     // google map 초기화
@@ -36,6 +37,9 @@ function createControl() {
     controlDiv.appendChild(controlUI);
 
 // Set CSS for the control interior.
+    var controlInput = document.createElement('input');
+    controlInput.id = 'search';
+    controlUI.appendChild(controlInput);
     var controlText = document.createElement('div');
     controlText.style.fontFamily = 'Arial,sans-serif';
     controlText.style.fontSize = '12px';
