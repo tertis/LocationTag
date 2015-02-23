@@ -4,6 +4,7 @@
 require(__dirname + '/include');
 var express = require('express');
 var app = express();
+var path = require('path');
 
 // directory를 use해 줘야 angular js의 스크립트가 사용 가능하다.
 app.use(express.static(process.env.clientDir));
