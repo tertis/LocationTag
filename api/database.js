@@ -10,13 +10,16 @@ var DB_conn = {
     port: 5432,
     ssl: true
 };
-var pg = require('pg');
-var client = new pg.Client(DB_conn);
 
-pg.connect(DB_conn, function(err, client) {
-    var query = client.query('SELECT * FROM test');
+function db_test(){
+    var pg = require('pg');
+    var client = new pg.Client(DB_conn);
 
-    query.on('row', function(row) {
-        console.log(JSON.stringify(row));
+    pg.connect(DB_conn, function(err, client) {
+        var query = client.query('SELECT * FROM test');
+
+        query.on('row', function(row) {
+            console.log(JSON.stringify(row));
+        });
     });
-});
+}
