@@ -16,6 +16,7 @@ function initialize() {
         mapOptions);
 
     CreateSearchBox('pac-input');
+    testTagMarker();
 }
 
 function CreateSearchBox(inputElement) {
@@ -74,6 +75,32 @@ function CreateSearchBox(inputElement) {
     google.maps.event.addListener(map, 'bounds_changed', function() {
         var bounds = map.getBounds();
         searchBox.setBounds(bounds);
+    });
+}
+
+
+var testDBData = {
+    id : '1',
+    name : '양재역',
+    locationN : '37.4846326',
+    locationE : '127.0339447',
+    tag : '지하철'
+}
+
+function testTagMarker()
+{
+    var infowindow = new google.maps.InfoWindow({
+        content: '<p><b>' + testDBData.name + '</b></p>' + testDBData.tag
+    });
+
+    var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(testDBData.locationN, testDBData.locationE),
+        map: map,
+        title: testDBData.name
+    });
+
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(map,marker);
     });
 }
 
