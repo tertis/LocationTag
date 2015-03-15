@@ -2,6 +2,7 @@
  * Created by tertis on 15. 2. 14..
  */
 var map;
+var addDataMarker= null;
 function initialize() {
     // Position initialize
     var mapOptions = {
@@ -15,8 +16,24 @@ function initialize() {
     map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
 
+    google.maps.event.addListener(map, 'click', function(event) {
+        addMarker(event.latLng);
+    });
+
     CreateSearchBox('pac-input');
     testTagMarker();
+}
+
+function addMarker(location) {
+    if (addDataMarker !== null) addDataMarker.setMap(null);
+    var infowindow = new google.maps.InfoWindow({
+        content: '<input type="text" name="fname">'
+    });
+    addDataMarker = new google.maps.Marker({
+        position: location,
+        map: map
+    });
+    infowindow.open(map,addDataMarker);
 }
 
 function CreateSearchBox(inputElement) {
