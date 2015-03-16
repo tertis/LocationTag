@@ -2,7 +2,31 @@
  * Created by tertis on 15. 2. 14..
  */
 var map;
-var addDataMarker= null;
+var addDataMarker = null;
+var infoWindow = null;
+var addContentElement = null;
+
+function clearChildren(element) {
+    for (var i = 0; i < element.childNodes.length; i++) {
+        var e = element.childNodes[i];
+        if (e.tagName) switch (e.tagName.toLowerCase()) {
+            case 'input':
+                switch (e.type) {
+                    case "radio":
+                    case "checkbox": e.checked = false; break;
+                    case "button":
+                    case "submit":
+                    case "image": break;
+                    default: e.value = ''; break;
+                }
+                break;
+            case 'select': e.selectedIndex = 0; break;
+            case 'textarea': e.innerHTML = ''; break;
+            default: clearChildren(e);
+        }
+    }
+}
+
 function initialize() {
     // Position initialize
     var mapOptions = {
@@ -16,24 +40,33 @@ function initialize() {
     map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
 
-    google.maps.event.addListener(map, 'click', function(event) {
+    google.maps.event.addListener(map, 'click', function (event) {
         addMarker(event.latLng);
     });
 
+    InitializeInfoWindow();
     CreateSearchBox('pac-input');
     testTagMarker();
 }
 
+function InitializeInfoWindow() {
+    addContentElement = document.getElementById('add-input');
+
+    infoWindow = new google.maps.InfoWindow({
+        content: null
+    });
+}
+
+
 function addMarker(location) {
     if (addDataMarker !== null) addDataMarker.setMap(null);
-    var infowindow = new google.maps.InfoWindow({
-        content: '<input type="text" name="fname">'
-    });
+    clearChildren(addContentElement);
+    infoWindow.setContent(addContentElement);
     addDataMarker = new google.maps.Marker({
         position: location,
         map: map
     });
-    infowindow.open(map,addDataMarker);
+    infoWindow.open(map,addDataMarker);
 }
 
 function CreateSearchBox(inputElement) {
