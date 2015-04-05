@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="locationTag">
 <head>
     <title>Simple Map</title>
     <link rel="stylesheet" type="text/css" href="index.css">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script src="googleMaps.js"></script>
 </head>
 <body>
 <div id="map-canvas"></div>
 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-<div id="add-input" class="controls" type="text">
-    <p><b>Name </b><input type="text" name="name"></p>
-    <p><b>Description </b><input type="text" name="description"></p>
-    <p><b>Tags </b><input type="text" name="tag"></p>
+<div ng-controller="addController" id="add-input" class="controls" type="text">
+    <p><input type="text" id="add-title" placeholder="Titie"></p>
+    <p><input type="text" id="add-description" placeholder="Description"></p>
+    <p><input type="text" id="add-tags" placeholder="Tags"></p>
+    <button type="button" ng-click="addTagMarker()">Add Marker</button>
 </div>
 <div id="test-window" class="controls" type="text">테스트</div>
 </body>

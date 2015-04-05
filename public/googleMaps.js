@@ -6,6 +6,8 @@ var addDataMarker = null;
 var infoWindow = null;
 var addContentElement = null;
 
+var activeAddMarker = {};
+
 function clearChildren(element) {
     for (var i = 0; i < element.childNodes.length; i++) {
         var e = element.childNodes[i];
@@ -128,9 +130,8 @@ function CreateSearchBox(inputElement) {
     });
 }
 
-
+// 테스트
 var testDBData = {
-    id : '1',
     name : '양재역',
     locationN : '37.4846326',
     locationE : '127.0339447',
@@ -153,5 +154,25 @@ function testTagMarker()
         infowindow.open(map,marker);
     });
 }
+
+// add 관련 처리
+var locationTag = angular.module('locationTag', []);
+
+locationTag.controller('addController', function($scope,$http) {
+    $scope.addTagMarker = function () {
+        activeAddMarker.location = { N :addDataMarker.position.lat(), E:addDataMarker.position.lng()};
+        activeAddMarker.title = document.getElementById('add-title').value;
+        activeAddMarker.description = document.getElementById('add-description').value;
+        activeAddMarker.tags = document.getElementById('add-tags').value;
+        $http.get('/add', {params: activeAddMarker})
+            .success(function (data) {
+                console.log(data);
+            })
+            .error(function (data) {
+                console.log('Error: ' + data);
+            });
+
+    };
+});
 
 google.maps.event.addDomListener(window, 'load', initialize);
