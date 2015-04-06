@@ -5,6 +5,6 @@
   "main": "server.js",
   "dependencies": {
     "express": "latest",
-    "mysql": "latest"
+    "pg": "latest"
   }
 }
