@@ -21,6 +21,7 @@ app.get('/', function(req, res){
 app.get('/add', function(req, res){
     var queryObject = url.parse(req.url,true).query;
     console.log(queryObject);
+    db.AddMarkerData(queryObject);
     res.send();
 
 });

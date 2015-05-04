@@ -160,7 +160,8 @@ var locationTag = angular.module('locationTag', []);
 
 locationTag.controller('addController', function($scope,$http) {
     $scope.addTagMarker = function () {
-        activeAddMarker.location = { N :addDataMarker.position.lat(), E:addDataMarker.position.lng()};
+        activeAddMarker.locationN = addDataMarker.position.lat();
+        activeAddMarker.locationE = addDataMarker.position.lng();
         activeAddMarker.title = document.getElementById('add-title').value;
         activeAddMarker.description = document.getElementById('add-description').value;
         activeAddMarker.tags = document.getElementById('add-tags').value;
