@@ -53,7 +53,7 @@ function initialize() {
 
 function InitializeInfoWindow() {
     addContentElement = document.getElementById('add-input');
-
+    addContentElement.style.visibility = "hidden";
     infoWindow = new google.maps.InfoWindow({
         content: null
     });
@@ -63,6 +63,7 @@ function InitializeInfoWindow() {
 function addMarker(location) {
     if (addDataMarker !== null) addDataMarker.setMap(null);
     clearChildren(addContentElement);
+    addContentElement.style.visibility = "visible";
     infoWindow.setContent(addContentElement);
     addDataMarker = new google.maps.Marker({
         position: location,
