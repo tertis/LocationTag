@@ -131,28 +131,20 @@ function CreateSearchBox(inputElement) {
     });
 }
 
-// 테스트
-var testDBData = {
-    name : '양재역',
-    locationN : '37.4846326',
-    locationE : '127.0339447',
-    tag : '지하철'
-}
-
-function testTagMarker()
+function makeTagMarker(markerData)
 {
-    var infowindow = new google.maps.InfoWindow({
-        content: '<p><b>' + testDBData.name + '</b></p>' + testDBData.tag
+    var markerInfoWindow = new google.maps.InfoWindow({
+        content: '<p><b>' + markerData.name + '</b></p>' + markerData.tag
     });
 
     var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(testDBData.locationN, testDBData.locationE),
+        position: new google.maps.LatLng(markerData.locationN, markerData.locationE),
         map: map,
-        title: testDBData.name
+        title: markerData.name
     });
 
     google.maps.event.addListener(marker, 'click', function() {
-        infowindow.open(map,marker);
+        markerInfoWindow.open(map,marker);
     });
 }
 
