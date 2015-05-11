@@ -32,4 +32,20 @@ exports.AddMarkerData = function(data) {
         // 에러 발생 시에만 불린다.
         console.log('[DB] AddMarkerData Error...' + error);
     });
-}
+};
+
+exports.LoadMarkerData = function(data, res) {
+    var queryText = util.format("SELECT * FROM markers;");
+    connectionPool[connectionUsed].query(queryText, function(err, result){
+        if(err){
+            console.log('[DB] LoadMarkerData Error...' + error);
+            return;
+        }
+
+        for(var i = 0; i < result.rowCount; ++i){
+            console.log('Row' + i + ' ' + JSON.stringify(result.rows[i]));
+        }
+
+        res.send(result.rows);
+    });
+};

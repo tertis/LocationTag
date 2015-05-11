@@ -26,5 +26,10 @@ app.get('/add', function(req, res){
 
 });
 
+app.get('/load', function(req, res){
+    var queryObject = url.parse(req.url,true).query;
+    db.LoadMarkerData(queryObject, res);
+})
+
 app.listen(port);
 console.log('Start Listen ' + port);

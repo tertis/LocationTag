@@ -48,7 +48,6 @@ function initialize() {
 
     InitializeInfoWindow();
     CreateSearchBox('pac-input');
-    testTagMarker();
 }
 
 function InitializeInfoWindow() {
@@ -133,14 +132,15 @@ function CreateSearchBox(inputElement) {
 
 function makeTagMarker(markerData)
 {
+    console.log('MakeTagMarker');
     var markerInfoWindow = new google.maps.InfoWindow({
-        content: '<p><b>' + markerData.name + '</b></p>' + markerData.tag
+        content: '<p><b>' + markerData.title + '</b></p>' + markerData.tags
     });
 
     var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(markerData.locationN, markerData.locationE),
+        position: new google.maps.LatLng(markerData.locatione, markerData.locationn),
         map: map,
-        title: markerData.name
+        title: markerData.title
     });
 
     google.maps.event.addListener(marker, 'click', function() {
@@ -167,6 +167,20 @@ locationTag.controller('addController', function($scope,$http) {
             });
 
     };
+});
+
+locationTag.controller('loadController', function($scope, $http) {
+   $http.get('/load')
+       .success(function (data) {
+           console.log('Load Success: ' + JSON.stringify(data));
+           for(var i = 0; i < data.length; ++i) {
+               makeTagMarker(data[i]);
+           }
+
+       })
+       .error(function (data) {
+           console.log('Load Error: ' + JSON.stringify(data));
+       });
 });
 
 google.maps.event.addDomListener(window, 'load', initialize);
